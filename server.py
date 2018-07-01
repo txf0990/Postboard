@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import sqlite3
 from postboard import Database
 
@@ -32,6 +32,12 @@ def visit_postboard():
         database.addEntry(request.form['content'])
     posts = database.showDatabase() # posts is a list of tuple.
     return render_template('postboard.html', posts=posts)
+
+@app.route('/delete')
+def delete():
+    database = Database('post.db')
+    database.deleteEntry(request.args['id'])
+    return redirect(url_for('visit_postboard'))
 
 if __name__ == '__main__':
     app.run()
