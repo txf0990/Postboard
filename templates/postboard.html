@@ -1,0 +1,8 @@
+{% for post in posts %}
+    <li>{{ post[1] }}</li>
+{% endfor %}
+
+<form name="Message" method="POST">
+Message1: <input type="text" name="content"><br>
+<input type="submit" value="Submit">
+</form>
